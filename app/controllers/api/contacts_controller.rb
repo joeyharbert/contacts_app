@@ -10,7 +10,11 @@ class Api::ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
-    render 'show.json.jbuilder'
+    if current_user.id == @contact.user_id
+      render 'show.json.jbuilder'
+    else
+      render json: []
+    end
   end
 
   def create
