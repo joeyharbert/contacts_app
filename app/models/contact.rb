@@ -3,6 +3,9 @@ class Contact < ApplicationRecord
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validate :email_in_proper_format?
+
+  belongs_to :user
+
   def email_in_proper_format?
     if !(email.include?("@") && email[-4..-1] == ".com")
       errors.add(:email, "not in proper format")
